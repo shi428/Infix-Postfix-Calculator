@@ -1,4 +1,4 @@
-SRCS = main.cpp stack.cpp read.cpp
+SRCS =main.cpp stack.cpp read.cpp 
 HEADERS = stack.h
 WARNING = -Wall -Wshadow --pedantic
 ERROR = -Werror -Wvla
@@ -7,7 +7,7 @@ VAL = valgrind --tool=memcheck --log-file=memcheck.txt --leak-check=full --show-
 EXE = calculator
 CPP = c++ -std=c++11 -g $(WARNING) $(ERROR) $(INCLUDE)
 OBJS = $(SRCS:%.cpp=%.o)
-run: $(EXE) memory
+run: clean $(EXE) memory
 	./$(EXE)
 $(EXE): $(OBJS) 
 	$(CPP) $(OBJS) -o $(EXE)

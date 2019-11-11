@@ -29,7 +29,7 @@ ListNode<T> *list<T>::addNode(T input) {
 
 template <class T>
 void list<T>::push_back(T input) {
-  cout << input << endl;
+//  cout << input << endl;
   if (!head) {
     head = addNode(input);
     tail = head;

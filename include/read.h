@@ -4,7 +4,8 @@
 #pragma once
 
 const char array[] = {'+', '-', '*', '/', '^', '(', ')'};
-int isOperator(char *input);
+int isListOperator(const char *input);
+int isOperator(char input);
 bool validateInput(string &input);
 bool isNumber(string &number);
 bool findChar(string &str, char input, int pos);
@@ -26,7 +27,7 @@ void readString(string &input, list<T> &equation) {
       ss >> insert;
       negloc = i;
     }
-    if (isOperator(&j) != -1) {
+    if (isOperator(j) != -1) {
       if (first) {
         if (!negative) {
           if (i != 0) {

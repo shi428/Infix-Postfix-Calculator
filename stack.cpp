@@ -24,7 +24,6 @@ StackNode *stack::addNode(string input) {
 }
 
 void stack::push(string input) {
-  cout << input << endl;
   if (!bottom) {
     bottom = addNode(input);
     top = bottom;
@@ -38,6 +37,7 @@ void stack::push(string input) {
 }
 
 void stack::pop() {
+  cout << top->value << endl;
   if (bottom == NULL) {
     cerr << "Stack empty!" << endl;
     return ;
@@ -74,3 +74,12 @@ bool stack::isEmpty() {
   }
   return false;
 }
+
+string &stack::getTop() {
+  return top->value;
+}
+
+string &stack::getBottom() {
+  return top->value;
+}
+

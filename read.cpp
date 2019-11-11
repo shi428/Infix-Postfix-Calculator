@@ -5,16 +5,27 @@
 
 using namespace std;
 
-int isOperator(char *input) {
+int isListOperator(const char *input) {
   int counter = 0;
   for (auto i: array) {
     if (*input == i) {
-      if (counter == 1 && isdigit(input[1])) {
+      if (counter == 1 && !isdigit(input[1])) {
         return counter;
       }
       if (counter != 1) {
         return counter;
       }
+    }
+    counter++;
+  }
+  return -1;
+}
+
+int isOperator(char input) {
+  int counter = 0;
+  for (auto i: array) {
+    if (input == i) {
+      return counter;
     }
     counter++;
   }

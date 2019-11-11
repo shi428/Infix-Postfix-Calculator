@@ -19,6 +19,8 @@ class stack {
     void traverse();
     StackNode *addNode(string input);
     bool isEmpty();
+    string &getTop();
+    string &getBottom();
   private:
     StackNode *top;
     StackNode *bottom;
