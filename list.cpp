@@ -1,44 +1,49 @@
 #include <iostream>
-#include <list.h>
+//#include <list.h>
 #include <stdio.h>
 using namespace std;
-list::list() {
+template <class T>
+list<T>::list() {
   head = NULL;
   tail = NULL;
 }
 
-list::~list() {
-  ListNode *iterator = head;
+template <class T>
+list<T>::~list() {
+  ListNode<T> *iterator = head;
   while (iterator) {
-    ListNode *next = iterator->next;
+    ListNode<T> *next = iterator->next;
     delete iterator;
     iterator = next;
   }
 }
 
-ListNode *list::addNode(string input) {
-  ListNode *newNode = new ListNode;
+template <class T>
+ListNode<T> *list<T>::addNode(T input) {
+  ListNode<T> *newNode = new ListNode<T>;
   newNode->value = input;
   newNode->next = NULL;
   newNode->prev = NULL;
   return newNode;
 }
 
-void list::push_back(string input) {
+template <class T>
+void list<T>::push_back(T input) {
   cout << input << endl;
   if (!head) {
     head = addNode(input);
     tail = head;
   }
   else {
-    ListNode *temp = tail;
+    ListNode<T> *temp = tail;
     tail = addNode(input); 
     tail->prev = temp;
     temp->next = tail;
   }
 }
 
-void list::pop_back() {
+template <class T>
+void list<T>::pop_back() {
   if (head == NULL) {
     cerr << "List empty!" << endl;
     return ;
@@ -49,41 +54,44 @@ void list::pop_back() {
     tail = head;
   }
   else {
-    ListNode *prev = tail->prev;
+    ListNode<T> *prev = tail->prev;
     delete tail;
     tail = prev;
     tail->next = NULL;
   }
 }
 
-void list::insertAfter(ListNode *before, string input) {
-  ListNode *insert = addNode(input);
-  ListNode *next = before->next;
+template <class T>
+void list<T>::insertAfter(ListNode<T> *before, T input) {
+  ListNode<T> *insert = addNode(input);
+  ListNode<T> *next = before->next;
   before->next = insert;
   insert->next = next;
   next->prev = insert;
   insert->prev = before;
 }
 
-void list::push_front(string input) {
+template <class T>
+void list<T>::push_front(T input) {
   if (!head) {
     head = addNode(input);
     tail = head;
   }
   else {
-  ListNode *newHead = addNode(input);
+  ListNode<T> *newHead = addNode(input);
   newHead->next = head;
   head->prev = newHead;
   head = newHead;
   }
 }
 
-void list::pop_front() {
+template <class T>
+void list<T>::pop_front() {
   if (!head) {
     cerr << "List Empty!" << endl;
     return;
   }
-  ListNode *temp = head;
+  ListNode<T> *temp = head;
   delete temp;
   head = head->next;
   if (head) {
@@ -91,7 +99,8 @@ void list::pop_front() {
   }
 }
 
-void list::deleteNode(ListNode *remove) {
+template <class T>
+void list<T>::deleteNode(ListNode<T> *remove) {
   if (!remove) {
     cerr << "item does not exist in the linked list!" << endl;
     return ;
@@ -104,10 +113,10 @@ void list::deleteNode(ListNode *remove) {
     pop_back();
     return ;
   }
-  ListNode *iterator = head;
+  ListNode<T> *iterator = head;
   while (iterator) {
     if (iterator->next == remove) {
-      ListNode *next = remove->next;
+      ListNode<T> *next = remove->next;
       delete remove;
       iterator = next;
       return ;
@@ -116,8 +125,9 @@ void list::deleteNode(ListNode *remove) {
   }
 }
 
-ListNode *list::search(string input) {
-  ListNode *iterator = head;
+template <class T>
+ListNode<T> *list<T>::search(T input) {
+  ListNode<T> *iterator = head;
   while (iterator) {
     if (iterator->value == input) {
       return iterator;
@@ -126,18 +136,20 @@ ListNode *list::search(string input) {
   return NULL;
 }
 
-bool list::isEmpty() {
+template <class T>
+bool list<T>::isEmpty() {
   if (!head) {
     return true;
   }
   return false;
 }
 
-void list::traverse() {
+template <class T>
+void list<T>::traverse() {
   if (isEmpty()) {
     return ;
   }
-  ListNode *iterator = head;
+  ListNode<T> *iterator = head;
   cerr << "items in the list" << endl;
   while (iterator) {
     cout << iterator->value << " ";
@@ -146,15 +158,18 @@ void list::traverse() {
   cerr << endl;
 }
 
-ListNode *list::getHead() {
+template <class T>
+ListNode<T> *list<T>::getHead() {
   return head;
 }
 
-ListNode *list::getTail() {
+template <class T>
+ListNode<T> *list<T>::getTail() {
   return tail;
 }
 
-ListNode *list::goForward(ListNode *input) {
+template <class T>
+ListNode<T> *list<T>::goForward(ListNode<T> *input) {
   if (!input) {
     return NULL;
   }

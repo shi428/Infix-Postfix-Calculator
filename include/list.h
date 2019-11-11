@@ -3,30 +3,33 @@
 #pragma once
 
 using namespace std;
+template <class T>
 
-typedef struct listnode {
-  struct listnode *prev;
-  struct listnode *next;
-  string value;
-}ListNode;
+struct ListNode {
+  struct ListNode *prev;
+  struct ListNode *next;
+  T value;
+};
+template <class T>
 class list {
   public:
     list();
     ~list();
-    ListNode *addNode(string input);
-    void push_back(string input);
+    ListNode<T> *addNode(T input);
+    void push_back(T input);
     void pop_back();
-    void insertAfter(ListNode *before, string input);
-    void push_front(string input);
+    void insertAfter(ListNode<T> *before, T input);
+    void push_front(T input);
     void pop_front();
-    void deleteNode(ListNode *remove);
-    ListNode *search(string input);
+    void deleteNode(ListNode<T> *remove);
+    ListNode<T> *search(T input);
     bool isEmpty();
     void traverse();
-    ListNode *getHead();
-    ListNode *getTail();
-    ListNode *goForward(ListNode *input);
+    ListNode<T> *getHead();
+    ListNode<T> *getTail();
+    ListNode<T> *goForward(ListNode<T> *input);
   private:
-    ListNode *head;
-    ListNode *tail;
+    ListNode<T> *head;
+    ListNode<T> *tail;
 };
+#include "../list.cpp"

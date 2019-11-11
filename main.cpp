@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
   string input;
-  list test;
+  list <string>test;
   getline(cin, input);
  // bool beginning = true;
 /*  for (unsigned int i = 0; i < input.length(); i++) {
@@ -65,7 +65,9 @@ int main(int argc, char *argv[]) {
   if (!check) {
     return EXIT_FAILURE;
   }*/
+  list <string> postfix;
   readString(input, test);
+  //convert(test, postfix);
   while (!test.isEmpty()) {
     test.traverse();
     test.pop_back();

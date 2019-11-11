@@ -1,4 +1,4 @@
-SRCS = main.cpp stack.cpp list.cpp read.cpp
+SRCS = main.cpp stack.cpp read.cpp
 HEADERS = stack.h
 WARNING = -Wall -Wshadow --pedantic
 ERROR = -Werror -Wvla
