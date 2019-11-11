@@ -59,8 +59,10 @@ void readString(string &input, list &equation) {
     if (isOperator(j) != -1) {
       if (first) {
         if (!negative) {
+          if (i != 0) {
           insert = input.substr(0, i);
           equation.push_back(insert);
+          }
         }
         else {
           string rest = input.substr(1, i - 1);
@@ -75,8 +77,10 @@ void readString(string &input, list &equation) {
       }
       else {
         if (!negative) {
+          if (i != wordbegin) {
           insert = input.substr(wordbegin, i - wordbegin);
           equation.push_back(insert);
+          }
         }
         else {
           string rest = input.substr(negloc + 1, i - (negloc + 1));
@@ -107,6 +111,7 @@ void readString(string &input, list &equation) {
         insert = input.substr(i);
       }
       equation.push_back(insert);
+      break;
     }
     i++;
   }

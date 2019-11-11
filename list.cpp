@@ -2,23 +2,6 @@
 #include <list.h>
 #include <stdio.h>
 using namespace std;
-unsigned int cmalloc=0;
-unsigned int cfree=0;
-void* check_malloc(size_t size ){
-  void *p = malloc(size);
-  printf("Allocated = %p[%li]\n", p, size);
-  ++cmalloc;
-  return p;
-}
-void check_free(void *ptr){
-  printf("Freed %p\n", ptr);
-  ++cfree;
-  free(ptr);
-  return;
-}
-#define malloc(X) check_malloc(X)
-#define free(X) check_free(X)
-
 list::list() {
   head = NULL;
   tail = NULL;
