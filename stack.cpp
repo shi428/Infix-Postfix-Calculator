@@ -37,7 +37,7 @@ void stack::push(string input) {
 }
 
 void stack::pop() {
-  cout << top->value << endl;
+//  cout << top->value << endl;
   if (bottom == NULL) {
     cerr << "Stack empty!" << endl;
     return ;

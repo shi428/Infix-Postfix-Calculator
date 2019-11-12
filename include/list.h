@@ -28,6 +28,8 @@ class list {
     ListNode<T> *getHead();
     ListNode<T> *getTail();
     ListNode<T> *goForward(ListNode<T> *input);
+    ListNode<T> *goBackward(ListNode<T> *input);
+    int size();
   private:
     ListNode<T> *head;
     ListNode<T> *tail;

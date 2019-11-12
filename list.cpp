@@ -91,9 +91,9 @@ void list<T>::pop_front() {
     cerr << "List Empty!" << endl;
     return;
   }
-  ListNode<T> *temp = head;
-  delete temp;
-  head = head->next;
+  ListNode<T> *next = head->next;
+  delete head;
+  head = next;
   if (head) {
     head->prev = NULL;
   }
@@ -118,7 +118,8 @@ void list<T>::deleteNode(ListNode<T> *remove) {
     if (iterator->next == remove) {
       ListNode<T> *next = remove->next;
       delete remove;
-      iterator = next;
+      iterator->next = next;
+      next->prev = iterator;
       return ;
     }
     iterator = iterator->next;
@@ -132,6 +133,7 @@ ListNode<T> *list<T>::search(T input) {
     if (iterator->value == input) {
       return iterator;
     }
+    iterator = iterator->next;
   }
   return NULL;
 }
@@ -150,7 +152,7 @@ void list<T>::traverse() {
     return ;
   }
   ListNode<T> *iterator = head;
-  cerr << "items in the list" << endl;
+//  cerr << "items in the list" << endl;
   while (iterator) {
     cout << iterator->value << " ";
     iterator = iterator->next;
@@ -175,3 +177,22 @@ ListNode<T> *list<T>::goForward(ListNode<T> *input) {
   }
   return input->next;
 }
+template <class T>
+ListNode<T> *list<T>::goBackward(ListNode<T> *input) {
+  if (!input) {
+    return NULL;
+  }
+  return input->prev;
+}
+
+template <class T>
+int list<T>::size() {
+  int i = 0;
+  ListNode <T>*iterator = head;
+  while (iterator) {
+    iterator = iterator->next;
+    i++;
+  }
+  return i;
+}
+

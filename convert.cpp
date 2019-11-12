@@ -1,5 +1,19 @@
+double stringToNum(string &data) {
+  double ret;
+  stringstream conv(data);
+  conv >> ret;
+  return ret;
+}
+string numToString(double data) {
+  string ret;
+  stringstream conv;
+  conv << data;
+  conv >> ret;
+  return ret;
+}
+
 template <class T>
-void convert(list <T>& equation, list <T> postfix) {
+void convert(list <T>& equation, list <T>& postfix) {
   ListNode <T> *iterator = equation.getHead();
   stack operators;
   while (iterator) {
@@ -55,5 +69,122 @@ void convert(list <T>& equation, list <T> postfix) {
     postfix.push_back(operators.getTop());
     operators.pop();
   }
+  postfix.traverse();
+}
+void calculate(list<string>&postfix) {
+  int opFound = -1;
+  while (postfix.size() > 1) {
+    ListNode<string> *iterator = postfix.getHead();
+    while (iterator) {
+      if ((opFound = isListOperator(iterator->value.c_str())) != -1) {
+        break;
+      }
+      iterator = postfix.goForward(iterator);
+    }
+      ListNode<string> *first = postfix.goBackward(iterator);
+      ListNode<string> *second = postfix.goBackward(first);
+      ListNode<string> *prev = postfix.goBackward(second);
+    if (!opFound) {
+      double firstOp = stringToNum(first->value);
+      double secondOp = stringToNum(second->value);
+      double sum = firstOp + secondOp;
+      postfix.deleteNode(iterator);
+      postfix.deleteNode(first);
+      postfix.deleteNode(second);
+      string insert = numToString(sum);
+      if (postfix.isEmpty()) {
+        postfix.push_back(insert);
+      }
+      else {
+        if (prev) {
+        postfix.insertAfter(prev, insert);
+        }
+        else {
+          postfix.push_front(insert);
+        }
+      }
+    }
+    else if (opFound == 1) {
+      double firstOp = stringToNum(first->value);
+      double secondOp = stringToNum(second->value);
+      double difference = secondOp - firstOp;
+      postfix.deleteNode(iterator);
+      postfix.deleteNode(first);
+      postfix.deleteNode(second);
+      string insert = numToString(difference);
+      if (postfix.isEmpty()) {
+        postfix.push_back(insert);
+      }
+      else {
+        if (prev) {
+        postfix.insertAfter(prev, insert);
+        }
+        else {
+          postfix.push_front(insert);
+        }
+      }
+    }
+    else if (opFound == 2) {
+      double firstOp = stringToNum(first->value);
+      double secondOp = stringToNum(second->value);
+      double product = firstOp * secondOp;
+      postfix.deleteNode(iterator);
+      postfix.deleteNode(first);
+      postfix.deleteNode(second);
+      string insert = numToString(product);
+      if (postfix.isEmpty()) {
+        postfix.push_back(insert);
+      }
+      else {
+        if (prev) {
+        postfix.insertAfter(prev, insert);
+        }
+        else {
+          postfix.push_front(insert);
+        }
+      }
+    }
+    else if (opFound == 3) {
+      double firstOp = stringToNum(first->value);
+      double secondOp = stringToNum(second->value);
+      double quotient = secondOp / firstOp;
+      postfix.deleteNode(iterator);
+      postfix.deleteNode(first);
+      postfix.deleteNode(second);
+      string insert = numToString(quotient);
+      if (postfix.isEmpty()) {
+        postfix.push_back(insert);
+      }
+      else {
+        if (prev) {
+        postfix.insertAfter(prev, insert);
+        }
+        else {
+          postfix.push_front(insert);
+        }
+      }
+    }
+    else if (opFound == 4) {
+      double firstOp = stringToNum(first->value);
+      double secondOp = stringToNum(second->value);
+      double exponent = pow(secondOp, firstOp);
+      postfix.deleteNode(iterator);
+      postfix.deleteNode(first);
+      postfix.deleteNode(second);
+      string insert = numToString(exponent);
+      if (postfix.isEmpty()) {
+        postfix.push_back(insert);
+      }
+      else {
+        if (prev) {
+        postfix.insertAfter(prev, insert);
+        }
+        else {
+          postfix.push_front(insert);
+        }
+      }
+    }
+  }
+  cout << "Answer: ";
   postfix.traverse();
 }
