@@ -5,8 +5,10 @@ A simple calculator that takes user input, translates it into a postfix expressi
 ## Usage
 
 Commands
+* help - displays command information
 * clear - clears the screen
-* calc - opens the infix/postfix calculator. Type an arithmetic expression, and it will be converted, and then evaluated
+* calc - opens the infix/postfix calculator. Type an arithmetic expression, and it will be converted, and then evaluated. 
+* history - prints the history of entered expressions so far
 * quit - quits out of the program
 
 Makefile Commands

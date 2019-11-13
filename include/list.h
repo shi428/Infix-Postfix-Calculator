@@ -6,6 +6,8 @@ using namespace std;
 template <class T>
 
 struct ListNode {
+  ListNode<T>() {
+  }
   struct ListNode *prev;
   struct ListNode *next;
   T value;
@@ -30,6 +32,7 @@ class list {
     ListNode<T> *goForward(ListNode<T> *input);
     ListNode<T> *goBackward(ListNode<T> *input);
     int size();
+    void deleteList();
   private:
     ListNode<T> *head;
     ListNode<T> *tail;

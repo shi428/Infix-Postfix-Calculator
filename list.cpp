@@ -196,3 +196,10 @@ int list<T>::size() {
   return i;
 }
 
+template <class T>
+void list<T>::deleteList() {
+  while (!isEmpty()) {
+    pop_back();
+  }
+}
+
