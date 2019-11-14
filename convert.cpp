@@ -1,3 +1,6 @@
+#include <convert.h>
+#include <iostream>
+using namespace std;
 double stringToNum(string &data) {
   double ret;
   stringstream conv(data);
@@ -12,6 +15,15 @@ string numToString(double data) {
   return ret;
 }
 
+string getInfix(list <string> &infix) {
+  string ret;
+  ListNode<string> *iterator = infix.getHead();
+  while (iterator) {
+    ret = ret + iterator->value;
+    iterator = iterator->next;
+  }
+  return ret;
+}
 template <class T>
 void convert(list <T>& equation, list <T>& postfix) {
   ListNode <T> *iterator = equation.getHead();
@@ -188,3 +200,4 @@ void calculate(list<string>&postfix) {
   cout << "Answer: ";
   postfix.traverse();
 }
+template void convert<string>(list <string> &equation, list <string> &postfix);

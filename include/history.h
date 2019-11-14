@@ -1,17 +1,12 @@
 #include <string>
 #include <list.h>
 #include <iostream>
+#include <convert.h>
 #pragma once
 using namespace std;
-struct equation{
-  equation() {
-  }
-  equation(string &in, string &post);
-  string infix;
-  string postfix;
-};
-
-void appendLocalHistory(equation *newEquation, list <equation>&equationList);
-void deleteLocalHistory(list <equation> &equationList);
-void deleteEquation(list <equation> &equationList, int num);
-void appendGlobalHistory(equation &newEquation);
+void appendLocalHistory(string equation, list <string>&equationList);
+void deleteLocalHistory(list <string> &equationList);
+void deleteGlobalHistory();
+void deleteEquation(list <string> &equationList, int num);
+void appendGlobalHistory(string equation);
+bool fetchHistory(string &insert, list <string> &equationList);

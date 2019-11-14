@@ -2,9 +2,13 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <convert.h>
 using namespace std;
 
-bool handleCommand(string &commands, list <equation> &equation) {
+bool handleCommand(string &commands, list <string> &equation) {
+  int pos = commands.find(' ');
+  string first = commands.substr(0, pos);
+  string second = commands.substr(pos + 1);
   if (commands == "clear") {
     system("clear");
     return false;
@@ -21,7 +25,27 @@ bool handleCommand(string &commands, list <equation> &equation) {
   }
   else if (commands == "history") {
     printLocalHistory(equation);
+    readFile("history.txt");
     return false;
+  }
+  else if (first == "delete") {
+    if (second == "global") {
+      deleteGlobalHistory();
+      return false;
+    }
+    if (second == "local") {
+      deleteLocalHistory(equation);
+      return false;
+    }
+    if (equation.isEmpty()) {
+      cout << "Nothing to delete!" << endl;
+    }
+    else {
+      int eqnum;
+      cout << "Which equation do you wish to delete?" << endl;
+      scanf("%d", &eqnum);
+      deleteEquation(equation, eqnum);
+    }
   }
 
   return false;
@@ -31,6 +55,10 @@ void readFile(const char *filename) {
   ifstream myfile;
   myfile.open(filename, ios::in);
   bool commands = false;
+  if (myfile.fail()) {
+    cout << "history empty!" << endl;
+    return ;
+  }
   if (myfile.is_open()) {
     string line;
     if (!strcmp(filename, "README.md")) {
@@ -45,25 +73,31 @@ void readFile(const char *filename) {
           cout << line << endl;
         }
       }
-      myfile.close();
+    }
+    else {
+      cout << "Global History" << endl;
+      int i = 1;
+      while (getline(myfile, line)) {
+        cout << i << ". " << line << endl;
+        i++;
+      }
     }
   }
+  myfile.close();
 }
 
-void printLocalHistory(list <equation> &equationList) {
+void printLocalHistory(list <string> &equationList) {
   if (equationList.isEmpty()) {
     cout << "history empty!" << endl;
-    return ;
   }
   else {
-    ListNode <equation>*iterator = equationList.getHead();
+    cout << "Local History" << endl;
+    ListNode <string>*iterator = equationList.getHead();
     int i = 1;
     while (iterator) {
-      cout << i << " " << iterator->value.infix << "=" <<  iterator->value.postfix << endl;
+      cout << i << ". " <<iterator->value << endl;
       iterator = iterator->next;
       i++;
     }
   }
 }
-
-

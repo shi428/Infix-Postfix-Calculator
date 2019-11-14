@@ -1,8 +1,7 @@
 #include <string>
-#include <list.h>
 #include <history.h>
 #pragma once
 using namespace std;
-bool handleCommand(string &command, list <equation> &equation);
+bool handleCommand(string &command, list <string> &equation);
 void readFile(const char *filename);
-void printLocalHistory(list <equation> &equation);
+void printLocalHistory(list <string> &equation);

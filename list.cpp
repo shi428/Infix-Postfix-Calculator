@@ -1,6 +1,8 @@
 #include <iostream>
-//#include <list.h>
+#include <list.h>
 #include <stdio.h>
+#include <history.h>
+#include <type_traits>
 using namespace std;
 template <class T>
 list<T>::list() {
@@ -19,6 +21,18 @@ list<T>::~list() {
 }
 
 template <class T>
+void list<T>::operator=(list<T>copy) {
+  if (head) {
+    deleteList();
+  }
+  ListNode <T>*iterator=copy.getHead();
+  while (iterator) {
+    push_back(iterator->value);
+    iterator = iterator->next;
+  }
+}
+
+template <class T>
 ListNode<T> *list<T>::addNode(T input) {
   ListNode<T> *newNode = new ListNode<T>;
   newNode->value = input;
@@ -29,7 +43,6 @@ ListNode<T> *list<T>::addNode(T input) {
 
 template <class T>
 void list<T>::push_back(T input) {
-//  cout << input << endl;
   if (!head) {
     head = addNode(input);
     tail = head;
@@ -78,10 +91,10 @@ void list<T>::push_front(T input) {
     tail = head;
   }
   else {
-  ListNode<T> *newHead = addNode(input);
-  newHead->next = head;
-  head->prev = newHead;
-  head = newHead;
+    ListNode<T> *newHead = addNode(input);
+    newHead->next = head;
+    head->prev = newHead;
+    head = newHead;
   }
 }
 
@@ -152,12 +165,12 @@ void list<T>::traverse() {
     return ;
   }
   ListNode<T> *iterator = head;
-//  cerr << "items in the list" << endl;
+  //  cerr << "items in the list" << endl;
   while (iterator) {
     cout << iterator->value << " ";
     iterator = iterator->next;
   }
-  cerr << endl;
+  cout <<endl;
 }
 
 template <class T>
@@ -202,4 +215,4 @@ void list<T>::deleteList() {
     pop_back();
   }
 }
-
+template class list<string>;

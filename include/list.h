@@ -18,6 +18,7 @@ class list {
     list();
     ~list();
     ListNode<T> *addNode(T input);
+    void operator=(list<T>copy);
     void push_back(T input);
     void pop_back();
     void insertAfter(ListNode<T> *before, T input);
@@ -37,4 +38,3 @@ class list {
     ListNode<T> *head;
     ListNode<T> *tail;
 };
-#include "../list.cpp"
