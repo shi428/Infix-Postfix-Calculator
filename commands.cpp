@@ -47,7 +47,9 @@ bool handleCommand(string &commands, list <string> &equation) {
       deleteEquation(equation, eqnum);
     }
   }
-
+  else {
+    system("clear");
+  }
   return false;
 }
 
@@ -56,7 +58,7 @@ void readFile(const char *filename) {
   myfile.open(filename, ios::in);
   bool commands = false;
   if (myfile.fail()) {
-    cout << "history empty!" << endl;
+    cout << "Global History empty!" << endl;
     return ;
   }
   if (myfile.is_open()) {
@@ -88,7 +90,7 @@ void readFile(const char *filename) {
 
 void printLocalHistory(list <string> &equationList) {
   if (equationList.isEmpty()) {
-    cout << "history empty!" << endl;
+    cout << "Local History Empty!" << endl;
   }
   else {
     cout << "Local History" << endl;

@@ -81,7 +81,7 @@ void convert(list <T>& equation, list <T>& postfix) {
     postfix.push_back(operators.getTop());
     operators.pop();
   }
-  postfix.traverse();
+ postfix.traverse();
 }
 void calculate(list<string>&postfix) {
   int opFound = -1;

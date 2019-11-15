@@ -9,5 +9,5 @@ int isOperator(char input);
 bool validateInput(string &input);
 bool isNumber(string &number);
 bool findChar(string &str, char input, int pos);
-void readString(string &input, list<string> &infix, list<string> &equationList);
+bool readString(string &input, list<string> &infix, list<string> &equationList);
 

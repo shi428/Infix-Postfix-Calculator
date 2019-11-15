@@ -15,7 +15,7 @@ void appendGlobalHistory(string equation) {
 
 void deleteLocalHistory(list <string> &equationList) {
   equationList.deleteList();
-  cout << "Local History has been deleted" << endl;
+  cout << "Local History has been deleted!" << endl;
 }
 
 void deleteGlobalHistory() {
@@ -30,7 +30,7 @@ void deleteGlobalHistory() {
       cerr << "failed to remove file!" << endl;
     }
     else {
-      cout << "global history deleted!" << endl;
+      cout << "Glboal history has been deleted!" << endl;
     }
   }
 }

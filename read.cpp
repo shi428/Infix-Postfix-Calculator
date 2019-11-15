@@ -55,7 +55,7 @@ bool validateInput(string &input) {
   return true;
 }
 
-void readString(string &input, list<string> &infix, list<string> &equationList) {
+bool readString(string &input, list<string> &infix, list<string> &equationList) {
   int i = 0; 
   bool first = true;
   string insert;
@@ -80,28 +80,28 @@ void readString(string &input, list<string> &infix, list<string> &equationList) 
             if (insert == "ans") {
               if (!fetchHistory(insert, equationList)) {
                 cout << "Please try again" << endl;
-                return ;
+                return false;
               }
             }
             infix.push_back(insert);
           }
-          else {
-            string rest = input.substr(1, i - 1);
-            if (rest == "ans") {
-              if (!fetchHistory(rest, equationList)) {
-                cout << "Please try again" << endl;
-                return ;
-              }
-            }
-            insert = insert + rest;
-            infix.push_back(insert);
-            negative = false;
-          }
-          wordbegin = i + 1;
-          first = false;
-          insert = input.substr(i, 1);
-          infix.push_back(insert);
         }
+        else {
+          string rest = input.substr(1, i - 1);
+          if (rest == "ans") {
+            if (!fetchHistory(rest, equationList)) {
+              cout << "Please try again" << endl;
+              return false;
+            }
+          }
+          insert = insert + rest;
+          infix.push_back(insert);
+          negative = false;
+        }
+        wordbegin = i + 1;
+        first = false;
+        insert = input.substr(i, 1);
+        infix.push_back(insert);
       }
       else {
         if (!negative) {
@@ -110,7 +110,7 @@ void readString(string &input, list<string> &infix, list<string> &equationList) 
             if (insert == "ans") {
               if (!fetchHistory(insert, equationList)) {
                 cout << "Please try again" << endl;
-                return ;
+                return false;
               }
             }
             infix.push_back(insert);
@@ -121,7 +121,7 @@ void readString(string &input, list<string> &infix, list<string> &equationList) 
           if (rest == "ans") {
             if (!fetchHistory(rest, equationList)) {
               cout << "Please try again" << endl;
-              return ;
+              return false;
             }
           }
           insert = insert + rest;
@@ -149,7 +149,7 @@ void readString(string &input, list<string> &infix, list<string> &equationList) 
         if ((sub = input.substr(i + 1)) == "ans") {
           if (!fetchHistory(insert, equationList)) {
             cout << "Please try again" << endl;
-            return ;
+            return false;
           }
         }
         insert = negsign + sub;
@@ -159,7 +159,7 @@ void readString(string &input, list<string> &infix, list<string> &equationList) 
         if (insert == "ans") {
           if (!fetchHistory(insert, equationList)) {
             cout << "Please try again" << endl;
-            return ;
+            return false;
           }
         }
       }
@@ -168,4 +168,5 @@ void readString(string &input, list<string> &infix, list<string> &equationList) 
     }
     i++;
   }
+  return true;
 }

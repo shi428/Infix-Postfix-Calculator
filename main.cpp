@@ -20,15 +20,16 @@ int main(int argc, char *argv[]) {
       getline(cin, expression);
       list <string> postfix;
       cout << "You entered: " << expression << endl;
-      readString(expression, infix, equationList);
-      cout << "Postfix: ";
-      convert(infix, postfix);
-      calculate(postfix);
-      string answer = postfix.getHead()->value;
-      string in = getInfix(infix);
-      string hist = in+"="+answer;
-      appendLocalHistory(hist, equationList);
-      appendGlobalHistory(hist);
+      if (readString(expression, infix, equationList)) {
+        cout << "Postfix: ";
+        convert(infix, postfix);
+        calculate(postfix);
+        string answer = postfix.getHead()->value;
+        string in = getInfix(infix);
+        string hist = in+"="+answer;
+        appendLocalHistory(hist, equationList);
+        appendGlobalHistory(hist);
+      }
     }
   } while (input != "quit");
   /* list <char> a;
